@@ -1,0 +1,14 @@
+.list-group-item{
+    background-color: rgb(160, 138, 150);
+    color: aliceblue;
+    border-color: rgb(151, 173, 114);
+}
+.listadocursos{
+    color: aliceblue;
+}
+.buscar{
+    background-color: rgb(172, 162, 24);
+}
+.remove{
+    background-color: red;
+}

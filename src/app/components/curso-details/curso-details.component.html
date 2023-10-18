@@ -1,0 +1,124 @@
+<div *ngIf="viewMode; else editable" class="fondo">
+  <div *ngIf="currentElement.id" class="caja">
+    <h4>Instituto educativo - Curso</h4>
+    <div>
+      <label><strong>Nombre:</strong></label> {{ currentElement.nombre }}
+    </div>
+    <div>
+      <label><strong>ID:</strong></label> {{ currentElement.id }}
+    </div>
+    <div>
+      <label><strong>Fecha inicio:</strong></label>
+      {{ currentElement.fechaInicio | date: "dd-MM-yyyy" }}
+    </div>
+    <div>
+      <label><strong>ID Docente:</strong></label> {{ currentElement.idDocente }}
+    </div>
+    <div>
+      <label><strong>Tema:</strong></label> {{currentElement.tema.nombre}}
+    </div>
+    <div>
+      <label><strong>ID Tema:</strong></label> {{currentElement.tema.id }}
+    </div>     
+    <a 
+      class="badge badge-warning"
+      routerLink="/cursos/{{ currentElement.id }}"
+    >
+      Edit
+    </a>
+  </div>
+  <div *ngIf="!currentElement">
+    <br />
+    <p>Please click on a Post...</p>
+  </div>
+</div>
+<ng-template #editable>
+  <div *ngIf="currentElement.id" class="edit-form">
+    <h4 class="labeledit">Instituto educativo - Curso</h4>
+    <form>
+      <div class="form-group">
+        <label for="title" class="labeledit">Nombre del curso</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentElement.nombre"
+          name="title" 
+        />
+        <ng-template [ngIf]="vacioNombre(currentElement.nombre)">
+          <div class="mensaje">
+              Debe elegir un nombre para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso" class="form-group">
+        <label for="description" class="labeledit">Fecha de inicio</label>
+        <input [(ngModel)]="fechaux" name="description" id="description"
+        class="form-control" > 
+        <ng-template [ngIf]="vacioNombre(fechaux)">
+          <div class="mensaje">
+              Debe elegir una fecha de inicio para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso"class="form-group">
+        <label class="labeledit">ID Docente:</label>
+        <input
+          class="form-control"
+          id="docente"
+          required
+          [(ngModel)]="currentElement.idDocente"
+          name="docente" 
+        />
+        <ng-template [ngIf]="vacioNumero(currentElement.idDocente)">
+          <div class="mensaje">
+              Debe elegir el ID de un docente para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso" class="form-group">
+        <label class="labeledit">Tema:</label>
+        <input (input)="getElementByNombreTema(currentElement.tema.nombre)"
+          type="text"
+          class="form-control"
+          id="tema"
+          required
+          [(ngModel)]="currentElement.tema.nombre"
+          name="tema" 
+        />
+        <ng-template [ngIf]="vacioNombre(currentElement.tema.nombre)">
+          <div class="mensaje">
+              Debe elegir un tema para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso" class="form-group">
+        <label class="labeledit">ID Tema:</label>
+        <input (input)="getElementByIdTema(currentElement.tema.id)"  
+          class="form-control"
+          id="content"
+          required
+          [(ngModel)]="currentElement.tema.id"
+          name="content" 
+        />
+        <ng-template [ngIf]="vacioNumero(currentElement.tema.id)">
+          <div class="mensaje">
+            Debe elegir el ID de un tema para el curso  
+          </div>
+        </ng-template>
+      </div>  
+    </form>
+    <button class="badge badge-danger mr-3" (click)="deleteElement()">
+      Delete
+    </button>
+    <button type="submit" class="badge badge-success mb-3" (click)="actualizarFecha();updateElement()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentElement.id">
+    <br />
+    <p>Elemento no encontrado...</p>
+  </div>
+</ng-template>
+

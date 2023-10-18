@@ -1,0 +1,83 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label class="labeladd" for="title">Nombre del curso</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="curso.nombre"
+          name="title" 
+        />
+        <ng-template [ngIf]="vacioNombre(curso.nombre)">
+          <div class="mensaje">
+              Debe elegir un nombre para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label class="labeladd" for="description">Fecha de inicio</label>
+        <input [(ngModel)]="fechaux" name="description" id="description"
+        class="form-control" > 
+        <ng-template [ngIf]="vacioNombre(fechaux)">
+          <div class="mensaje">
+              Debe elegir una fecha de inicio para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso"class="form-group">
+        <label class="labeladd">ID Docente</label>
+        <input
+          class="inputadd"
+          class="form-control"
+          id="docente"
+          required
+          [(ngModel)]="curso.idDocente"
+          name="docente" 
+        />
+        <ng-template [ngIf]="vacioNumero(curso.idDocente)">
+          <div class="mensaje">
+              Debe elegir el ID de un docente para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso" class="form-group">
+        <label class="labeladd">Tema</label>
+        <input (input)="getElementByNombreTema(curso.tema.nombre)"
+          type="text"
+          class="form-control"
+          id="tema"
+          required
+          [(ngModel)]="curso.tema.nombre"
+          name="tema" 
+        />
+        <ng-template [ngIf]="vacioNombre(curso.tema.nombre)">
+          <div class="mensaje">
+              Debe elegir un tema para el curso
+          </div>
+        </ng-template>
+      </div>
+      <div FormGroup="curso" class="form-group">
+        <label class="labeladd">ID Tema</label>
+        <input (input)="getElementByIdTema(curso.tema.id)"  
+          class="form-control"
+          id="content"
+          required
+          [(ngModel)]="curso.tema.id"
+          name="content" 
+        />
+        <ng-template [ngIf]="vacioNumero(curso.tema.id)">
+          <div class="mensaje">
+            Debe elegir el ID de un tema para el curso  
+          </div>
+        </ng-template>
+      </div>  
+      <button (click)="actualizarFecha();saveCurso()" class="btn btn-success">Submit</button>
+    </div>
+    <div *ngIf="submitted">
+      <h4 class="submitcurso">Curso was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newCurso()">Add</button>
+    </div>
+  </div>
+</div>
