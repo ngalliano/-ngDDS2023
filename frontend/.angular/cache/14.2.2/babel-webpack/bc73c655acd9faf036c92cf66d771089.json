@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Tema {\n  constructor() {\n    this.id = 1;\n    this.nombre = '';\n    this.duracion = 2;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
