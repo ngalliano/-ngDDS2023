@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { Tema } from '../models/tema.model';\nexport class Curso {\n  constructor() {\n    this.tema = new Tema();\n    this.id = 1;\n    this.nombre = '';\n    this.idDocente = 1;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
